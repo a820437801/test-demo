@@ -2,15 +2,11 @@ server:
   port: 80
 
 # .....
-spring:
-  elasticsearch:
-    uris: http://192.168.52.130:9200
-    password:
-    username:
-  security:
-    user:
-      name: root
-      password: 123456
+#spring:
+#  security:
+#    user:
+#      name: root
+#      password: 123456
 
 
 

@@ -24,10 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
-                .withUser("root")
-                .password("root").roles("admin");
+        /*
+         * 配置为从内存中进行加载认证信息.
+         * 这里配置了两个用户 admin和user
+         */
+        auth.inMemoryAuthentication().withUser("admin").password("123456").roles();
+        auth.inMemoryAuthentication().withUser("user").password("123456").roles();
     }
 
     @Override
