@@ -1,5 +1,6 @@
 package com.wei.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,7 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -20,26 +22,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Bean
     PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        /*
-         * 配置为从内存中进行加载认证信息.
-         * 这里配置了两个用户 admin和user
-         */
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("123456"))
-                .roles("beijingAdmin","shanghaiAdmin");
-
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("123456"))
-                .roles();
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -49,14 +42,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //http.authorizeRequests()
+        //        .anyRequest().authenticated()
+        //        .and()
+        //        .formLogin()
+        //        .loginPage("/login.html")
+        //        .permitAll()
+        //        .and()
+        //        .csrf().disable();
+
+        // 定义哪些URL需要被保护、哪些不需要被保护
         http.authorizeRequests()
+                // 设置所有人都可以访问登录页面
+                .antMatchers("/login").permitAll()
+                // 任何请求,登录后可以访问
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login.html")
-                .permitAll()
-                .and()
-                .csrf().disable();
+                .formLogin().loginPage("/login");
     }
 
 }
