@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName("user_info")
+@TableName("user")
 public class UserInfo {
 
     private Integer id;
