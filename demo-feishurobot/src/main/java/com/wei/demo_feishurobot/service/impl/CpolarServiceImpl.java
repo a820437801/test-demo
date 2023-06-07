@@ -24,8 +24,8 @@ public class CpolarServiceImpl {
     @Value("${cpolar.password}")
     private String password;
 
-    public void getTunnels() {
-        CpolarResult<CpolarTunnel> result = cpolarClient.getTunnels();
+    public void getTunnels(String auth) {
+        CpolarResult<CpolarTunnel> result = cpolarClient.getTunnels(auth);
         System.out.println(result);
     }
 

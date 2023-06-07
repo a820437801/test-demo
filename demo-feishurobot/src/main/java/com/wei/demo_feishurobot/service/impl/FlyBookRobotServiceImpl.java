@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 /**
- * 飞书Appender实现
- *
- * @author venus
- * @version 1
+ * @author 82043
  */
 @Service
 public class FlyBookRobotServiceImpl {

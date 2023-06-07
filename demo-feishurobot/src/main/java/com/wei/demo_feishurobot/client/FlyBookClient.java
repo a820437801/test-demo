@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * @author 82043
  */
-@FeignClient(url = "https://open.feishu.cn/open-apis/bot", name = "flyBookClient")
+@FeignClient(url = "${fly-book.robot.base-url}", name = "flyBookClient")
 public interface FlyBookClient {
 
     /**
@@ -16,15 +16,7 @@ public interface FlyBookClient {
      * @param flyBookCardMessage 参数
      * @return 结果
      */
-    @PostMapping("/v2/hook/de82cc47-a2cd-49f1-8a80-d0e68abc1280")
+    @PostMapping("${fly-book.robot.send-msg}")
     FlyBookRobotResult sendMsg(FlyBookCardMessage flyBookCardMessage);
-
-    /**
-     * 发送卡片信息
-     * @param flyBookCardMessage 参数
-     * @return 结果
-     */
-    @PostMapping("/v2/hook/de82cc47-a2cd-49f1-8a80-d0e68abc1280")
-    FlyBookRobotResult sendMsg(String flyBookCardMessage);
 
 }

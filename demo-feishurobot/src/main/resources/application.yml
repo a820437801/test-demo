@@ -18,9 +18,10 @@ feign:
         read-timeout: 120000
 
 
-flyBook:
-  Robot:
-    url: https://open.feishu.cn/open-apis/bot
+fly-book:
+  robot:
+    base-url: https://open.feishu.cn/open-apis/bot
+    send-msg: /v2/hook/de82cc47-a2cd-49f1-8a80-d0e68abc1280
 
 cpolar:
   email: 820437801@qq.com

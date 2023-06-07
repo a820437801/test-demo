@@ -15,7 +15,7 @@ public class CpolarServiceImplTest {
 
     @Test
     public void getTunnels() {
-        cpolarService.getTunnels();
+        cpolarService.getTunnels("");
     }
 
     @Test
