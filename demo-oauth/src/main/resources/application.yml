@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8082
 
 spring:
   application:
-    name: demo-springsecurity
+    name: demo-oauth
   #返回json的全局时间格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -57,5 +57,9 @@ mybatis-plus:
       update-strategy: not_empty
     banner: false
 
-
+security:
+  oauth2:
+    client:
+      client-id: first-client
+      client-secret: noonewilleverguess
 

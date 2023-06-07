@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: demo-springsecurity
+  #返回json的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    property-naming-strategy: SNAKE_CASE
+
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 20000
+        read-timeout: 120000
+
+
+flyBook:
+  Robot:
+    url: https://open.feishu.cn/open-apis/bot
+
+cpolar:
+  email: 820437801@qq.com
+  password: XuanYuanLian820
+
+
