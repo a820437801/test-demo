@@ -12,6 +12,7 @@
         <module>demo-oauth</module>
         <module>demo-feishurobot</module>
         <module>demo-activiti</module>
+        <module>demo-activiti01</module>
     </modules>
 
     <parent>
