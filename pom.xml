@@ -13,6 +13,7 @@
         <module>demo-feishurobot</module>
         <module>demo-activiti</module>
         <module>demo-activiti01</module>
+        <module>demo-flowable</module>
     </modules>
 
     <parent>
