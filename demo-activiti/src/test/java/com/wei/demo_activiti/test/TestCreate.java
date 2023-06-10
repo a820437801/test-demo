@@ -2,10 +2,13 @@ package com.wei.demo_activiti.test;
 
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
 import java.util.List;
 
 public class TestCreate {
@@ -81,6 +84,38 @@ public class TestCreate {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         repositoryService.deleteDeployment(""); // 不存在未结束流程时可以删除
         repositoryService.deleteDeployment("", true); // 存在未结束流程，关联删除
+    }
+
+    /**
+     * 下载文件资源
+     */
+    @Test
+    public void testDownloadFile() throws IOException {
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        RepositoryService repositoryService = processEngine.getRepositoryService();
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
+                .processDefinitionKey("myProcess01")
+                .singleResult();
+        String deploymentId = processDefinition.getDeploymentId();
+
+        String pngName = processDefinition.getDiagramResourceName();
+        InputStream pngInput = repositoryService.getResourceAsStream(deploymentId, pngName);
+        String fileName = processDefinition.getResourceName();
+        InputStream xmlInput = repositoryService.getResourceAsStream(deploymentId, fileName);
+
+        File pngFile = new File("c:/aaa.png");
+        FileOutputStream pngOs = new FileOutputStream(pngFile);
+        IOUtils.copy(pngInput, pngOs);
+
+        File xmlFile = new File("c:/aaa.xml");
+        FileOutputStream xmlOs = new FileOutputStream(xmlFile);
+        IOUtils.copy(xmlInput, xmlOs);
+
+        pngInput.close();
+        xmlInput.close();
+        pngOs.close();
+        xmlOs.close();
+
     }
 
 }
